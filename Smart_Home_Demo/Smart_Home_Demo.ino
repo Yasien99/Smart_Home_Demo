@@ -10,6 +10,9 @@ LiquidCrystal_I2C lcd(0x3f, 16,2);
 #define kids_room_led 8
 #define temp_sensor A0 
 #define ldr A1
+#define room_one 13
+#define room_two 12
+#define room_three 11
 
 int flame;
 int motion;
@@ -95,6 +98,37 @@ void loop()
   //Serial.print(light);
   //Serial.print("\n");
   
-  
+  //blutooth modulue
+  if(Serial.available() > 0)
+  {
+    char input;
+    input = Serial.read();
+    switch (input)
+    {
+      case 'A':
+      digitalWrite(room_one,1);
+      break;
 
+      case 'a':
+      digitalWrite(room_one,0);
+      break;  
+
+      case 'B':
+      digitalWrite(room_two,1);
+      break;
+
+      case 'b':
+      digitalWrite(room_two,0);
+      break;  
+
+      case 'C':
+      digitalWrite(room_three,1);
+      break;
+
+      case 'c':
+      digitalWrite(room_three,0);
+      break;  
+    }
+    delay(50);
+  }
 }
