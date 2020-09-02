@@ -5,7 +5,7 @@ LiquidCrystal_I2C lcd(0x3f, 16,2);
 
 // sensors, leds
 #define flame_sensor 7
-#define buzzer A3
+#define buzzer 5
 #define pirPin 6
 #define kids_room_led 8
 #define temp_sensor A0 
@@ -46,6 +46,7 @@ void loop()
 {
   //flame sensor
   flame = digitalRead(flame_sensor);
+  //Serial.println(flame);
   
   if (flame == 1)
   {
@@ -58,19 +59,22 @@ void loop()
   
   // motion sensor
   motion = digitalRead(pirPin);
+  
   if (motion == 1)
   {
+    Serial.print("high");
     delay(1000);
     digitalWrite(kids_room_led,HIGH);
   }
   if (motion == 0)
   { 
+    Serial.print("low");
     delay(1000);
     digitalWrite(kids_room_led,LOW);
   }
   // Temperature sensor
   temp = analogRead(temp_sensor);
-  temp = temp * .48828125;
+  temp = (temp * .48828125) ;
   lcd.setCursor(0,0);
   lcd.print ("Tempreture:");
   lcd.setCursor(12,0); 
@@ -84,19 +88,19 @@ void loop()
   
   //light sensor
   light = analogRead(ldr);
-  if(light > 250)
+  if(light >= 80)
   {
     lcd.setCursor(0,1);
     lcd.print("It's morning now");
   }
-  if(light < 250)
+  if(light < 80)
   {
     lcd.setCursor(0,1);
     lcd.print("it's night now");
   }
-  //Serial.print("light =   ");
-  //Serial.print(light);
-  //Serial.print("\n");
+  Serial.print("light =   ");
+  Serial.print(light);
+  Serial.print("\n");
   
   //blutooth modulue
   if(Serial.available() > 0)
