@@ -62,19 +62,19 @@ void loop()
   
   if (motion == 1)
   {
-    Serial.print("high");
+    //Serial.println("high");
     delay(1000);
     digitalWrite(kids_room_led,HIGH);
   }
   if (motion == 0)
   { 
-    Serial.print("low");
+    //Serial.println("low");
     delay(1000);
     digitalWrite(kids_room_led,LOW);
   }
   // Temperature sensor
   temp = analogRead(temp_sensor);
-  temp = (temp * .48828125) ;
+  temp = (temp * .48828125);
   lcd.setCursor(0,0);
   lcd.print ("Tempreture:");
   lcd.setCursor(12,0); 
@@ -98,9 +98,9 @@ void loop()
     lcd.setCursor(0,1);
     lcd.print("it's night now");
   }
-  Serial.print("light =   ");
-  Serial.print(light);
-  Serial.print("\n");
+  //Serial.print("light =   ");
+  //Serial.print(light);
+  //Serial.print("\n");
   
   //blutooth modulue
   if(Serial.available() > 0)
